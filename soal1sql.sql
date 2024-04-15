@@ -1,14 +1,18 @@
-ALTER PROCEDURE get_gaji_dan_peringkat
-@departement varchar(100)
-AS
-BEGIN
-	SELECT nama, departemen, gaji,
-	RANK() OVER (PARTITION BY departemen ORDER BY gaji DESC) AS peringkat_gaji
-	FROM pegawai
-	where departemen = @departement;
-END
-GO
+CREATE TABLE employee_table (
+    employee TEXT NOT NULL,
+    salary INTEGER
+);
 
-exec get_gaji_dan_peringkat'Marketing';
+INSERT INTO employee_table (employee, salary) VALUES
+('Alice', 11),
+('Benn', 43),
+('Charles', 33),
+('Dorothy', 55),
+('Emma', 22),
+('Franklin', 33);
 
-CREATE INDEX idx_gaji ON pegawai(gaji);
+select
+row_number() over (order by salary desc) as peringkat_gaji,
+		employee,
+		salary
+    from employee_table et limit 3;
