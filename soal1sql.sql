@@ -1,3 +1,4 @@
+-- Active: 1718369971017@@127.0.0.1@5432@dibimbing_day1
 CREATE TABLE employee_table (
     employee TEXT NOT NULL,
     salary INTEGER
